@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-
-from openerp.osv import orm, fields
+import time
+from openerp.osv import fields,osv
 from openerp.tools.translate import _
 
-class sale_fiscal_application(orm.Model):
+# Overloaded sale_order to manage carriers :
+class sale_order(osv.osv):
     _inherit = 'sale.order'
     
     _columns = {
@@ -13,19 +14,19 @@ class sale_fiscal_application(orm.Model):
                                       ],'Application', readonly=False, select=True, required=True),
                 }
 
-    def onchange_partner_id(self, cr, uid, ids, partner_id, context=None):
+    def onchange_partner_id(self, cr, uid, ids, part, context=None):
         
-        result = {'value': {}}
+        result = super(sale_order, self).onchange_partner_id(cr, uid, ids, part, context=context)
         
         if not context:
             context = {}
 
-        if not partner_id:
+        if not part:
             result['value']['application'] = 'final_customer'
             return result
         
         partner_obj = self.pool.get('res.partner')
-        partner_data  = partner_obj.browse(cr, uid, partner_id, context=context).application
+        partner_data  = partner_obj.browse(cr, uid, part, context=context).application
 
         result['value']['application'] = partner_data
         
