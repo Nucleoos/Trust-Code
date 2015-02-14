@@ -35,12 +35,26 @@ class sale_order_followup(models.Model):
     _inherit = 'sale.order'
     
     def _meeting_count(self):
-        Event = self.env['calendar.event']
-        return {
-            self.id: Event.search_count([('sale_order_id', '=', self.id)])
-        }
-    
+        self.meeting_count = self.env['calendar.event'].search_count([('sale_order_id', '=', self.id)])
+                    
     meeting_count=fields.Integer(compute='_meeting_count', string='# Meetings')
     
+    @api.multi
+    def action_create_meeting(self):
+        """
+        Open meeting's calendar view to schedule meeting on current opportunity.
+        :return dict: dictionary value for created Meeting view
+        """
+        res = self.env['ir.actions.act_window'].for_xml_id('calendar', 'action_calendar_event')
+        partner_ids = [self.env.user.partner_id.id]
+        if self.partner_id:
+            partner_ids.append(self.partner_id.id)
+        res['context'] = {            
+            'default_partner_id': self.partner_id and self.partner_id.id or False,
+            'default_partner_ids': partner_ids,
+            'default_sale_order_id': self.id,
+            'default_related_to_sales': True,
+        }
+        return res
     
     
