@@ -19,12 +19,14 @@
 
 {
     'name': 'Sales Order Follow-Up',
+    'summary': "Add follow-up capabilities to sales order like in the leads",
     'version': '1.0',
-    'category': 'Sales',
-    'description': "Add follow-up capabilities to sales order like in the leads",
-    'author': 'Danimar Ribeiro',
+    'category': 'Sales',  
+    'author': 'TrustCode',
     'license': 'AGPL-3',
     'website': 'http://www.trustcode.com.br',
+    'contributors': ['Danimar Ribeiro <danimaribeiro@gmail.com>',
+                     'Mackilem Van der Laan Soares <mack.vdl@gmail.com>'],
     'description': """
           This module allows to register phone-calls, schedule them for a specific sales order
           or for a customer.
@@ -37,5 +39,6 @@
         'views/sales_order_followup.xml',
     ],
     'installable': True,
+    'application':True,
     'active': False,
 }
