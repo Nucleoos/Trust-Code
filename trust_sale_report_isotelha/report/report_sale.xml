@@ -15,7 +15,7 @@
     	
     	<template id="report_saleorder_document">
 		        <div class="page">
-		            <div class="oe_structure"/>	            
+		            <div class="oe_structure">	            
 						<div class="row" style="border-bottom:1px solid black">
 							<div class="col-xs-4">
 								<img t-if="o.company_id.logo" t-att-src="'data:image/png;base64,%s' % o.company_id.logo" style="max-height: 75px; padding-top: 10px; text-align:center"/>
@@ -137,40 +137,40 @@
 			                </tbody>
 			            </table>
 			            <div class="row">
-                		<div class="col-xs-4 pull-right">
-		                    <table class="table table-condensed">
-		                        <tr class="border-black">
-		                            <td><strong>Total s/ Impostos</strong></td>
-		                            <td class="text-right">
-		                                <span t-field="o.amount_untaxed"
-		                                    t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
-		                            </td>
-		                        </tr>
-		                        <tr>
-		                            <td>IPI</td>
-		                            <td class="text-right">
-		                                <span t-field="o.amount_tax"
-		                                    t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
-		                            </td>
-		                        </tr>
-		                        <tr class="border-black">
+                			<div class="col-xs-4 pull-right">
+		                    	<table class="table table-condensed">
+			                        <tr class="border-black">
+			                            <td><strong>Total s/ Impostos</strong></td>
+			                            <td class="text-right">
+			                                <span t-field="o.amount_untaxed"
+			                                    t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
+			                            </td>
+			                        </tr>
+			                        <tr>
+			                            <td>IPI</td>
+			                            <td class="text-right">
+			                                <span t-field="o.amount_tax"
+			                                    t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
+			                            </td>
+			                        </tr>
+			                        <tr class="border-black">
 		                            <td><strong>Total</strong></td>
 		                            <td class="text-right">
 		                                <span t-field="o.amount_total"
 		                                    t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
 		                            </td>
 		                        </tr>
-		                    </table>
-		                </div>
+		                    	</table>
+		                	</div>
+		            	</div>
 		            </div>
-		            <div class="oe_structure"/>
-		        </div>
-		    <div class="footer" style="text-align:center">
-        		<div class="oe_structure">
-           			<span>Isotelha Compósitos Eireli Me CNPJ.: 02.261.542/0001-43 I.E.: 3220014803</span><br></br>
-					<span>Rua Severiano Rodrigues da Silva, 1092 – B: Santa Rita - Três Cachoeiras/RS – Fone: (51) 3667 1660 – email: info@isotelha.com</span>
-           		</div>
-           	</div>
+		            <div class="footer" style="text-align:center">
+		        		<div class="oe_structure">
+		           			<span>Isotelha Compósitos Eireli Me CNPJ.: 02.261.542/0001-43 I.E.: 3220014803</span><br></br>
+							<span>Rua Severiano Rodrigues da Silva, 1092 – B: Santa Rita - Três Cachoeiras/RS – Fone: (51) 3667 1660 – email: info@isotelha.com</span>
+		           		</div>
+		           	</div>		            
+		        </div>			    
 		</template>
 				
 		<template id="report_sale">

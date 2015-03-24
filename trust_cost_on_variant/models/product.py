@@ -17,23 +17,33 @@
 #along with this program.  If not, see <http://www.gnu.org/licenses/>.        #
 ###############################################################################
 
-{
-    'name': 'Product Cost on Variant',
-    'summary': """Change the standard_price field to the variant. There are several
-        upsides with this approach""",
-    'version': '8.0',
-    'category': 'MRP',  
-    'author': 'TrustCode',
-    'license': 'AGPL-3',
-    'website': 'http://www.trustcode.com.br',
-    'contributors': ['Danimar Ribeiro <danimaribeiro@gmail.com>',
-                     'Mackilem Van der Laan Soares <mack.vdl@gmail.com>'
-                     ],    
-    'depends': [
-        'product'
-    ],
-    'data': [
-        'views/generic_view.xml',
-    ],    
-    'application':True,    
-}
+from openerp import models, api, fields
+import decimal_precision as dp
+
+class Product(models.Model):
+    _inherit = 'product.product'
+    
+    standard_price = fields.Float(digits=dp.get_precision('Product Price'), 
+                              help="Cost price of the product template used for standard stock valuation in accounting and used as a base price on purchase orders. "
+                                   "Expressed in the default unit of measure of the product.",
+                              groups="base.group_user", string="Cost Price",
+                              inverse='_set_standard_price')
+
+    
+    @api.one
+    @api.depends('standard_price')
+    def _set_standard_price(self):
+        ''' Store the standard price change in order to be able to retrieve the cost of a product template for a given date'''        
+        price_history_obj = self.pool['product.price.history']
+        user_company = self.pool.get('res.users').browse(cr, uid, uid, context=context).company_id.id
+        company_id = context.get('force_company', user_company)
+        price_history_obj.create(cr, uid, {
+            'product_template_id': product_tmpl_id,
+            'cost': value,
+            'company_id': company_id,
+        }, context=context)
+
+    
+    
+    
+    
