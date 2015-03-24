@@ -13,7 +13,18 @@
     		<field name="report_type">qweb-pdf</field>
     	</record>
     	
+    	<template id="external_layout_footer">
+    		<t t-raw="0" />
+		    <div class="footer" style="text-align:center">
+        		<div class="oe_structure">
+           			<span>Isotelha Compósitos Eireli Me CNPJ.: 02.261.542/0001-43 I.E.: 3220014803</span><br></br>
+					<span>Rua Severiano Rodrigues da Silva, 1092 – B: Santa Rita - Três Cachoeiras/RS – Fone: (51) 3667 1660 – email: info@isotelha.com</span>
+           		</div>
+           	</div>	
+		</template>
+    	
     	<template id="report_saleorder_document">
+    		 <t t-call="trust_sale_report_isotelha.external_layout_footer">
 		        <div class="page">
 		            <div class="oe_structure">	            
 						<div class="row" style="border-bottom:1px solid black">
@@ -163,15 +174,12 @@
 		                    	</table>
 		                	</div>
 		            	</div>
-		            </div>
-		            <div class="footer" style="text-align:center">
-		        		<div class="oe_structure">
-		           			<span>Isotelha Compósitos Eireli Me CNPJ.: 02.261.542/0001-43 I.E.: 3220014803</span><br></br>
-							<span>Rua Severiano Rodrigues da Silva, 1092 – B: Santa Rita - Três Cachoeiras/RS – Fone: (51) 3667 1660 – email: info@isotelha.com</span>
-		           		</div>
-		           	</div>		            
-		        </div>			    
+		            </div>		            		           	            
+		        </div>	
+		   	</t>		    
 		</template>
+		
+		
 				
 		<template id="report_sale">
 		    <t t-call="report.html_container">
