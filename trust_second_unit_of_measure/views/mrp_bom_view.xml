@@ -7,7 +7,7 @@
             <field name="model">mrp.bom</field>
             <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
             <field name="arch" type="xml">
-				<xpath expr="//field[@name='bom_line_ids']/tree/field[@name='date_stop']" position="after">
+				<xpath expr="//field[@name='bom_line_ids']/tree/field[@name='type']" position="after">
 					<field name="unidades" attrs="{'invisible': [('product_id', '=', False)] }" />
 					<field name="comprimento" attrs="{'invisible': [('product_id', '=', False)] }" />
 					<field name="largura" attrs="{'invisible': [('product_id', '=', False)] }" />
@@ -135,27 +135,9 @@
                             </tr>
                         </t>
                     </tbody>
-                </table>
-				
-			</xpath>
-			
-			
-            <xpath expr="//th[@class='text-right']" position="after">
-                <th class="text-right"><strong>Unidades</strong></th>
-                <th class="text-right"><strong>Comprimento</strong></th>
-                <th class="text-right"><strong>Largura</strong></th>
-            </xpath>
-            <xpath expr="//td[@class='text-right']" position="after">
-                 <td class="text-right">
-                    <span t-field="line.unidades"/>                    
-				</td>
-				<td class="text-right">
-                    <span t-field="line.comprimento"/>                    
-				</td>
-				<td class="text-right">
-                    <span t-field="line.largura"/>                    
-				</td>
-            </xpath>
+                </table>				
+			</xpath>						
+         
         </template>
 		
 	</data>

@@ -33,6 +33,10 @@ class mrp_bom_line(models.Model):
     comprimento = fields.Integer(string="Comprimento")
     unidades = fields.Integer(string="Unidades")
     
+    @api.onchange('largura', 'comprimento', 'unidades')
+    def compute_quantity(self):
+        self.product_qty = (self.largura or 1) * (self.comprimento or 1) * (self.unidades or 1)
+    
 
 class mrp_production_product_line(models.Model):
     _inherit = 'mrp.production.product.line'
