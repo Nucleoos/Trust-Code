@@ -35,5 +35,5 @@
         'report/report_sale.xml',
     ],    
     'application':True,
-    'auto_install':True
+    'auto_install':False
 }

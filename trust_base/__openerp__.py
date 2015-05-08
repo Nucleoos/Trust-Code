@@ -33,7 +33,8 @@
     ],
     'data': [
         'views/module_view.xml',
+        'data/base_data.xml'
     ],    
     'application':True,
-    'auto_install':True
+    'auto_install':False
 }

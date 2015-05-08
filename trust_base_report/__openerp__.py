@@ -32,8 +32,8 @@
         'base', 'report'
     ],
     'data': [
-        'report/report_sale.xml',
+        'report/report_base.xml',
     ],    
     'application':True,
-    'auto_install':True
+    'auto_install':False
 }

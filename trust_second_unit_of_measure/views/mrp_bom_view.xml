@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+        <record id="second_uom_mrp_bom_form_view" model="ir.ui.view">
+            <field name="name">second.uom.mrp.bom.form</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="arch" type="xml">
+				<xpath expr="//field[@name='bom_line_ids']/tree/field[@name='date_stop']" position="after">
+					<field name="quantidade" attrs="{'invisible': [('product_id', '=', False)] }" />
+					<field name="comprimento" attrs="{'invisible': [('product_id', '=', False)] }" />
+					<field name="largura" attrs="{'invisible': [('product_id', '=', False)] }" />
+				</xpath>
+			</field>
+		</record>
+		
+		<record id="second_uom_mrp_production_product_tree_view" model="ir.ui.view">
+            <field name="name">second.uom.mrp.production.product.line.tree</field>
+            <field name="model">mrp.production.product.line</field>
+            <field name="inherit_id" ref="mrp.mrp_production_product_tree_view"/>
+            <field name="arch" type="xml">
+            	<field name="product_uos" position="after">
+            		<field name="quantidade" />
+            		<field name="comprimento" />
+            		<field name="largura" />
+            	</field>
+			</field>
+		</record>
+	</data>
+</openerp>

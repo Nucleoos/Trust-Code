@@ -30,9 +30,14 @@
                      'Mackilem Van der Laan Soares <mack.vdl@gmail.com>',
                      ],    
     'depends': [
+            'product', 'sale', 'mrp'
     ],
     'data': [
-        'views/generic_view.xml',
+        'views/product_template_view.xml',
+        'views/res_config_view.xml',
+        'views/sale_order_view.xml',
+        'views/mrp_bom_view.xml',
+        'security/second_unit_security.xml',
     ],    
     'application':True,    
 }
