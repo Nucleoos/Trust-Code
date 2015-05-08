@@ -22,7 +22,7 @@ class mrp_bom(models.Model):
             line = results[indice]
             line['largura'] = bom_line_id.largura
             line['comprimento'] = bom_line_id.comprimento
-            line['quantidade'] = bom_line_id.quantidade
+            line['unidades'] = bom_line_id.unidades
             indice += 1
         return results, results2
 
@@ -31,7 +31,7 @@ class mrp_bom_line(models.Model):
     
     largura = fields.Integer(string="Largura")
     comprimento = fields.Integer(string="Comprimento")
-    quantidade = fields.Integer(string="Quantidade")
+    unidades = fields.Integer(string="Unidades")
     
 
 class mrp_production_product_line(models.Model):
@@ -39,13 +39,26 @@ class mrp_production_product_line(models.Model):
     
     largura = fields.Integer(string="Largura")
     comprimento = fields.Integer(string="Comprimento")
-    quantidade = fields.Integer(string="Quantidade")
+    unidades = fields.Integer(string="Unidades")
+    
+
+class stock_move(models.Model):
+    _inherit = 'stock.move'
+    
+    largura = fields.Integer(string="Largura")
+    comprimento = fields.Integer(string="Comprimento")
+    unidades = fields.Integer(string="Unidades")
     
 
 class mrp_production(models.Model):
     _inherit = 'mrp.production'
     
-    def action_compute(self, cr, uid, ids, properties=None, context=None):
-        return super(mrp_production,self).action_compute(cr, uid, ids, properties=properties, context=context)
+        
+    def _make_production_consume_line(self, cr, uid, line, context=None):        
+        move_id = super(mrp_production, self)._make_production_consume_line(cr, uid, line, context=context)
+        
+        self.pool['stock.move'].write(cr, uid, move_id, { 'unidades':line.unidades, 
+                                'comprimento':line.comprimento, 'largura':line.largura})       
+        return move_id
         
         
